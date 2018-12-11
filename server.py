@@ -23,7 +23,20 @@ CORS(app)
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return render_template('orderupload.html')
+
+class CheckLazadaPrice(Resource):
+    def get(self):
+        prod=request.args.get("product", type=str)
+        df=lazada.getProduct(prod)
+        
+        resp = make_response(df.to_csv(header=True, index=False))
+        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
+        resp.headers["Content-Type"] = "text/csv"
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
+        return resp
     
 class crawlLazada(Resource):
     def get(self):
@@ -75,6 +88,7 @@ class GetJobReport(Resource):
 api.add_resource(crawlLazada, '/testworker')
 api.add_resource(Failedworkers, '/failedworkers')
 api.add_resource(GetJobReport, '/jobreport')
+api.add_resource(CheckLazadaPrice, '/lazprice')
 
 
 if __name__ == '__main__':

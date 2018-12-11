@@ -7,4 +7,18 @@ Created on Tue Dec 11 22:29:09 2018
 
 import requests
 
-url='http'
+#url='https://woonzh.herokuapp.com/testworker'
+#
+#params={
+#    'product': 'lennovo watch'
+#        }
+#
+#jid=requests.get(url, params=params)
+#jid=jid.text
+
+params2={
+    'jobid': jid
+        }
+
+url2='https://woonzh.herokuapp.com/jobreport'
+report=requests.get(url2, params=params2)

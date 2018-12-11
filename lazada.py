@@ -43,7 +43,7 @@ def parseMain(info):
     return df
 
 def getProduct(name):
-    chromepath='D:\stuff\chromedriver\chromedriver.exe'
+    chromepath='chromedriver\chromedriver.exe'
     
     options=webdriver.ChromeOptions()
     options.add_argument('headless')
@@ -52,7 +52,7 @@ def getProduct(name):
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
     
-    time.sleep(5)
+    time.sleep(2)
     
     inForm=driver.find_element_by_id('q')
     inForm.send_keys(name)
@@ -65,6 +65,6 @@ def getProduct(name):
     
     time.sleep(3)
     
-    driver.Dispose()
-    
+    driver.quit()
+
     return df
