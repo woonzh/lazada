@@ -28,6 +28,7 @@ def hello():
 class CheckLazadaPrice(Resource):
     def get(self):
         prod=request.args.get("product", type=str)
+        print(prod)
         df=lazada.getProduct(prod)
         
         resp = make_response(df.to_csv(header=True, index=False))
