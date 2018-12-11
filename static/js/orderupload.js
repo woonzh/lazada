@@ -5,7 +5,7 @@ function onload(){
 function csvUpload(){
     event.preventDefault();
     document.getElementById("loading").style.display="block";
-    url="http://mccptester.herokuapp.com/lazprice";
+    url="https://woonzh.herokuapp.com/lazprice";
     apikey=document.getElementById("apikey").value;
 
     $.ajax({
