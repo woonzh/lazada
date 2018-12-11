@@ -43,7 +43,7 @@ def parseMain(info):
     return df
 
 def getProduct(name):
-    chromepath='chromedriver\chromedriver.exe'
+    chromepath='chromedriver/chromedriver.exe'
     
     options=webdriver.ChromeOptions()
     options.add_argument('headless')
