@@ -42,12 +42,42 @@ def parseMain(info):
         count+=1
     return df
 
-def getProduct(name):
-    chromepath='chromedriver/chromedriver.exe'
+def nonServerGetProduct(name):
+    chromepath='chromedriver\chromedriver.exe'
     
     options=webdriver.ChromeOptions()
     options.add_argument('headless')
     driver = webdriver.Chrome(chromepath, chrome_options=options)
+    driver.maximize_window()
+    mainURL="https://www.lazada.sg"
+    driver.get(mainURL)
+    
+    time.sleep(2)
+    
+    inForm=driver.find_element_by_id('q')
+    inForm.send_keys(name)
+    
+    driver.find_element_by_class_name('search-box__button--1oH7').click()
+    
+    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
+    
+    df=parseMain(mains)
+    
+    time.sleep(3)
+    
+    driver.quit()
+
+    return df
+
+def getProduct(name):
+    chromebin='/app/.apt/usr/bin/google-chrome'
+    chromepath='/app/.chromedriver/bin/chromedriver'
+    
+    options=webdriver.ChromeOptions()
+    options.binary_location = chromebin
+    options.add_argument('--disable-gpu')
+    options.add_argument('headless')
+    driver = webdriver.Chrome(executable_path=chromepath, chrome_options=options)
     driver.maximize_window()
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
