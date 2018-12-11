@@ -77,7 +77,7 @@ def getProduct(name):
     options.binary_location = chromebin
     options.add_argument('--disable-gpu')
     options.add_argument('headless')
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome(executable_path=chromepath, chrome_options=options)
     driver.maximize_window()
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
@@ -92,6 +92,7 @@ def getProduct(name):
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
     
     df=parseMain(mains)
+    print(len(df))
     
     time.sleep(3)
     

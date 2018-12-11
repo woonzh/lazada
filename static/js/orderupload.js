@@ -11,7 +11,7 @@ function csvUpload(){
     $.ajax({
       url: url,
       type: 'GET',
-      data:{prod: apikey},
+      data:{product: apikey},
       success: function (data) {
         alert("Success. Results file will be downloaded.");
         csv = 'data:text/csv;charset=utf-8,' + encodeURI(data);
