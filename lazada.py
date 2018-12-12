@@ -74,15 +74,19 @@ def getProduct(name):
     chromebin='/app/.apt/usr/bin/google-chrome'
     chromepath='/app/.chromedriver/bin/chromedriver' 
     
+    print('check1')
+    
     options=Options()
     options.binary_location = chromebin
     options.add_argument('--disable-gpu')
-#    options.add_argument('--no-sandbox')
+    options.add_argument('--no-sandbox')
     options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=chromepath, chrome_options=options)
     driver.maximize_window()
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
+    
+    print('check2')
     
     time.sleep(2)
     
@@ -92,7 +96,7 @@ def getProduct(name):
     driver.find_element_by_class_name('search-box__button--1oH7').click()
     
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-    
+    print('check3')
     df=parseMain(mains)
     print(len(df))
     
