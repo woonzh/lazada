@@ -10,7 +10,7 @@ import requests
 url='https://woonzh.herokuapp.com/lazprice'
 
 params={
-    'product': 'garmin'
+    'product': 'microsoft surface pro keyboard'
         }
 
 jid=requests.get(url, params=params)
