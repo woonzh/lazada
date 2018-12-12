@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 import time
 import pandas as pd
@@ -73,9 +74,10 @@ def getProduct(name):
     chromebin='/app/.apt/usr/bin/google-chrome'
     chromepath='/app/.chromedriver/bin/chromedriver'
     
-    options=webdriver.ChromeOptions()
+    options=Options()
     options.binary_location = chromebin
     options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
     options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=chromepath, chrome_options=options)
     driver.maximize_window()
