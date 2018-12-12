@@ -10,7 +10,7 @@ import requests
 url='https://woonzh.herokuapp.com/lazprice'
 
 params={
-    'product': 'microsoft surface pro keyboard'
+    'product': 'wood storage cupboard'
         }
 
 jid=requests.get(url, params=params)
