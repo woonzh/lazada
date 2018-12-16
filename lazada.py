@@ -89,18 +89,22 @@ def getProduct(name):
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
-    mainURL="https://www.lazada.sg"
+#    mainURL="https://www.lazada.sg"
+    mainURL="https://blog.codeship.com/get-selenium-to-wait-for-page-load/"
     driver.get(mainURL)
     
     print(name)
     
     time.sleep(2)
     
-    inForm=driver.find_element_by_id('q')
-    inForm.send_keys(name)
-    
-    logo=driver.find_element_by_class_name('lzd-logo-content')
+    logo=driver.find_element_by_class_name('flexMenu_block -left -logo')
     print('blogo %s'%(logo))
+    
+#    inForm=driver.find_element_by_id('q')
+#    inForm.send_keys(name)
+    
+#    logo=driver.find_element_by_class_name('lzd-logo-content')
+#    print('blogo %s'%(logo))
     
 #    driver.find_element_by_class_name('search-box__button--1oH7').click()
 #    
@@ -121,3 +125,4 @@ def getProduct(name):
     driver.quit()
 
     return 1
+#    return df
