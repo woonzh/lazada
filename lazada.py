@@ -102,22 +102,22 @@ def getProduct(name):
     logo=driver.find_element_by_class_name('lzd-logo-content')
     print('blogo %s'%(logo))
     
-    driver.find_element_by_class_name('search-box__button--1oH7').click()
-    
-    time.sleep(3)
-    
-    logo=driver.find_element_by_class_name('lzd-logo-content')
-    print('blogo %s'%(logo))
-    
-    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-    mains2=driver.find_elements_by_xpath('//div[@class="lzd-header-content"]')
-    print(mains)
-    print(mains2)
-    df=parseMain(mains)
-    print(len(df))
-    
-    time.sleep(1)
+#    driver.find_element_by_class_name('search-box__button--1oH7').click()
+#    
+#    time.sleep(3)
+#    
+#    logo=driver.find_element_by_class_name('lzd-logo-content')
+#    print('blogo %s'%(logo))
+#    
+#    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
+#    mains2=driver.find_elements_by_xpath('//div[@class="lzd-header-content"]')
+#    print(mains)
+#    print(mains2)
+#    df=parseMain(mains)
+#    print(len(df))
+#    
+#    time.sleep(1)
     
     driver.quit()
 
-    return df
+    return 1
