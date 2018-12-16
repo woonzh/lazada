@@ -71,7 +71,7 @@ def nonServerGetProduct(name):
 
     return df
 
-#df=nonServerGetProduct('nike caps')
+df=nonServerGetProduct('nike free rn')
 
 def getProduct(name):
 #    chromebin='/app/.apt/usr/bin/google-chrome'
@@ -99,13 +99,16 @@ def getProduct(name):
     inForm=driver.find_element_by_id('q')
     inForm.send_keys(name)
     
-    driver.find_element_by_class_name('search-box__button--1oH7').click()
+    button=driver.find_element_by_class_name('search-box__button--1oH7')
+    print(button)
+    button.click()
+    
     time.sleep(2)
     
     print(driver)
     
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-    mains2=driver.find_elements_by_xpath('lzd-header-content')
+    mains2=driver.find_elements_by_xpath('//div[@class="lzd-header-content"]')
     print(mains)
     print(mains2)
     df=parseMain(mains)

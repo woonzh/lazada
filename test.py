@@ -10,7 +10,7 @@ import requests
 url='https://woonzh.herokuapp.com/lazprice'
 
 params={
-    'product': 'addidas sneakers'
+    'product': 'addidas yeezy'
         }
 
 jid=requests.get(url, params=params)
