@@ -48,7 +48,8 @@ def nonServerGetProduct(name):
     chromepath='chromedriver\chromedriver.exe'
     
     options=webdriver.ChromeOptions()
-#    options.add_argument('headless')
+    options.add_argument('no-sandbox')
+    options.add_argument('headless')
     driver = webdriver.Chrome(chromepath, chrome_options=options)
     driver.maximize_window()
     mainURL="https://www.lazada.sg"
@@ -86,8 +87,8 @@ def getProduct(name):
     
     options=Options()
     options.binary_location = GOOGLE_CHROME_BIN
-#    options.add_argument('--disable-gpu')
-#    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
 #    options.add_argument("user-data-dir=selenium") 
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)

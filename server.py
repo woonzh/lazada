@@ -42,6 +42,19 @@ class CheckLazadaPrice(Resource):
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp
     
+class LocalLazadaCrawl(Resource):
+    def get(self):
+        prod=request.args.get("product", type=str)
+        df=lazada.nonServerGetProduct(prod)
+        
+        resp = make_response(df.to_csv(header=True, index=False))
+        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
+        resp.headers["Content-Type"] = "text/csv"
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
+        return resp
+    
 class crawlLazada(Resource):
     def get(self):
         prod=request.args.get("product", type=str, default="marshall in-ear")
@@ -93,7 +106,9 @@ api.add_resource(crawlLazada, '/testworker')
 api.add_resource(Failedworkers, '/failedworkers')
 api.add_resource(GetJobReport, '/jobreport')
 api.add_resource(CheckLazadaPrice, '/lazprice')
+api.add_resource(LocalLazadaCrawl, '/local')
 
 
 if __name__ == '__main__':
-     app.run(debug=True)
+#     app.run(debug=True)
+    app.run(host='0.0.0.0', port=80)
