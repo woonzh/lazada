@@ -89,13 +89,13 @@ def getProduct(name):
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
-    mainURL="https://www.lazada.sg/catalog/?q=osim+massage"
+    mainURL="https://www.lazada.sg/catalog/?q=osim+chair"
 #    mainURL="https://blog.codeship.com/get-selenium-to-wait-for-page-load/"
     driver.get(mainURL)
     
     print(name)
     
-    time.sleep(5)
+    time.sleep(10)
     
 #    logo=driver.find_element_by_class_name('flexMenu_block')
 #    print('blogo %s'%(logo))
