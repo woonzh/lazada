@@ -100,14 +100,18 @@ def getProduct(name):
     inForm.send_keys(name)
     
     driver.find_element_by_class_name('search-box__button--1oH7').click()
+    time.sleep(2)
+    
+    print(driver)
     
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-    
+    mains2=driver.find_elements_by_xpath('lzd-header-content')
     print(mains)
+    print(mains2)
     df=parseMain(mains)
     print(len(df))
     
-    time.sleep(3)
+    time.sleep(1)
     
     driver.quit()
 
