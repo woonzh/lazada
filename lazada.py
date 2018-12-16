@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 import time
 import pandas as pd
+import os
 
 xpaths={
     'name':'.//div[@class="c16H9d"]', 
@@ -71,17 +72,20 @@ def nonServerGetProduct(name):
     return df
 
 def getProduct(name):
-    chromebin='/app/.apt/usr/bin/google-chrome'
-    chromepath='/app/.chromedriver/bin/chromedriver' 
+#    chromebin='/app/.apt/usr/bin/google-chrome'
+#    chromepath='/app/.chromedriver/bin/chromedriver' 
+    GOOGLE_CHROME_BIN=os.environ.get('GOOGLE_CHROME_BIN', None)
+    CHROMEDRIVER_PATH=os.environ.get('CHROMEDRIVER_PATH', None)
     
-    print('check1')
+    print(GOOGLE_CHROME_BIN)
+    print(CHROMEDRIVER_PATH)
     
     options=Options()
-    options.binary_location = chromebin
+    options.binary_location = GOOGLE_CHROME_BIN
     options.add_argument('--disable-gpu')
 #    options.add_argument('--no-sandbox')
     options.add_argument('headless')
-    driver = webdriver.Chrome(executable_path=chromepath, chrome_options=options)
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
