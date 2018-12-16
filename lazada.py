@@ -71,7 +71,7 @@ def nonServerGetProduct(name):
 
     return df
 
-df=nonServerGetProduct('nike caps')
+#df=nonServerGetProduct('nike caps')
 
 def getProduct(name):
 #    chromebin='/app/.apt/usr/bin/google-chrome'
