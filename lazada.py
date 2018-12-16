@@ -91,26 +91,23 @@ def getProduct(name):
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
-    mainURL="https://www.lazada.sg/catalog/?q=nike shirt"
+    mainURL="https://www.lazada.sg"
 #    mainURL="https://blog.codeship.com/get-selenium-to-wait-for-page-load/"
     driver.get(mainURL)
     
     print(name)
     
-    time.sleep(10)
+    time.sleep(2)
     
-#    logo=driver.find_element_by_class_name('flexMenu_block')
-#    print('blogo %s'%(logo))
+    inForm=driver.find_element_by_id('q')
+    inForm.send_keys(name)
     
-#    inForm=driver.find_element_by_id('q')
-#    inForm.send_keys(name)
+    logo=driver.find_elements_by_class_name('lzd-logo-content')
+    print('blogo %s'%(logo))
     
-#    logo=driver.find_elements_by_class_name('lzd-logo-content')
-#    print('blogo %s'%(logo))
-    
-#    driver.find_element_by_class_name('search-box__button--1oH7').click()
+    driver.find_element_by_class_name('search-box__button--1oH7').click()
 ##    
-#    time.sleep(3)
+    time.sleep(5)
 ##    
 #    logo=driver.find_element_by_class_name('lzd-logo-content')
 #    print('blogo2 %s'%(logo))
@@ -119,7 +116,7 @@ def getProduct(name):
 #    print(mains)
 #    df=parseMain(mains)
 #    print(len(df))
-    a={'data':driver.page_source  }  
+    a={'data':driver.page_source}  
 
     time.sleep(1)
     
