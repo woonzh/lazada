@@ -99,11 +99,15 @@ def getProduct(name):
     inForm=driver.find_element_by_id('q')
     inForm.send_keys(name)
     
-    button=driver.find_element_by_class_name('search-box__button--1oH7')
-    print('button %s'%(button))
-    button.click()
+    logo=driver.find_element_by_class_name('lzd-logo-content')
+    print('blogo %s'%(logo))
+    
+    driver.find_element_by_class_name('search-box__button--1oH7').click()
     
     time.sleep(2)
+    
+    logo=driver.find_element_by_class_name('lzd-logo-content')
+    print('blogo %s'%(logo))
     
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
     mains2=driver.find_elements_by_xpath('//div[@class="lzd-header-content"]')
