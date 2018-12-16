@@ -74,11 +74,11 @@ def nonServerGetProduct(name):
 def getProduct(name):
 #    chromebin='/app/.apt/usr/bin/google-chrome'
 #    chromepath='/app/.chromedriver/bin/chromedriver' 
-    GOOGLE_CHROME_BIN=os.environ.get('GOOGLE_CHROME_BIN', None)
-    CHROMEDRIVER_PATH=os.environ.get('CHROMEDRIVER_PATH', None)
+    GOOGLE_CHROME_BIN=os.getenv('GOOGLE_CHROME_BIN')
+    CHROMEDRIVER_PATH=os.getenv('CHROMEDRIVER_PATH')
     
-    print(GOOGLE_CHROME_BIN)
-    print(CHROMEDRIVER_PATH)
+    print('google chrom bin: %s'%(GOOGLE_CHROME_BIN))
+    print('chromdriver: %s'%(CHROMEDRIVER_PATH))
     
     options=Options()
     options.binary_location = GOOGLE_CHROME_BIN
