@@ -90,7 +90,7 @@ def getProduct(name):
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
     
-    print('check2')
+    print(name)
     
     time.sleep(2)
     
@@ -100,7 +100,8 @@ def getProduct(name):
     driver.find_element_by_class_name('search-box__button--1oH7').click()
     
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-    print('check3')
+    
+    print(mains)
     df=parseMain(mains)
     print(len(df))
     

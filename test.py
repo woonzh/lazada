@@ -10,10 +10,11 @@ import requests
 url='https://woonzh.herokuapp.com/lazprice'
 
 params={
-    'product': 'huawei mate 10'
+    'product': 'huawei mate 20'
         }
 
 jid=requests.get(url, params=params)
+print(jid)
 #jid=jid.text
 #
 #params2={
