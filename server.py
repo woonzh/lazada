@@ -30,12 +30,16 @@ class CheckLazadaPrice(Resource):
         prod=request.args.get("product", type=str)
         df=lazada.getProduct(prod)
         
-        resp = make_response(df.to_csv(header=True, index=False))
-        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
-        resp.headers["Content-Type"] = "text/csv"
+#        resp = make_response(df.to_csv(header=True, index=False))
+#        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
+#        resp.headers["Content-Type"] = "text/csv"
+#        resp.headers['Access-Control-Allow-Origin'] = '*'
+#        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+#        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
+#        return resp
+    
+        resp = flask.Response(json.dumps(df))
         resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.headers['Access-Control-Allow-Credentials'] = 'true'
-        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
         return resp
     
 class crawlLazada(Resource):
