@@ -104,7 +104,7 @@ def getProduct(name):
     
     driver.find_element_by_class_name('search-box__button--1oH7').click()
     
-    time.sleep(5)
+    time.sleep(3)
     
     logo=driver.find_element_by_class_name('lzd-logo-content')
     print('blogo %s'%(logo))
