@@ -99,6 +99,8 @@ def getProduct(name):
     
     time.sleep(2)
     
+    first=driver.page_source
+    
     inForm=driver.find_element_by_id('q')
     inForm.send_keys(name)
     
@@ -116,7 +118,8 @@ def getProduct(name):
 #    print(mains)
 #    df=parseMain(mains)
 #    print(len(df))
-    a={'data':driver.page_source}  
+    a={'first':first,
+       'second': driver.page_source}  
 
     time.sleep(1)
     
