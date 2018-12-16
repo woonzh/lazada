@@ -10,12 +10,15 @@ import json
 
 url='https://woonzh.herokuapp.com/lazprice'
 
+url='http://localhost:8080/local'
+
 params={
-    'product': 'mothballs'
+    'product': 'fossil watch'
         }
 
 jid=requests.get(url, params=params)
 print(jid)
+a=jid.text
 
 try:
     a=json.loads(jid.text)
@@ -23,6 +26,7 @@ try:
     second=a['second']
 except:
     t=1
+    
 #jid=jid.text
 #
 #params2={

@@ -55,6 +55,10 @@ class LocalLazadaCrawl(Resource):
         resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
         return resp
     
+#        resp = flask.Response(json.dumps(df))
+#        resp.headers['Access-Control-Allow-Origin'] = '*'
+#        return resp
+    
 class crawlLazada(Resource):
     def get(self):
         prod=request.args.get("product", type=str, default="marshall in-ear")
@@ -101,14 +105,24 @@ class GetJobReport(Resource):
         resp.headers['Access-Control-Allow-Origin'] = '*'
         print("header success")
         return resp
+    
+class test(Resource):
+    def get(self):
+        a={'data':'test'}
+        
+        resp = flask.Response(json.dumps(a))
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        print("header success")
+        return resp
 
 api.add_resource(crawlLazada, '/testworker')
 api.add_resource(Failedworkers, '/failedworkers')
 api.add_resource(GetJobReport, '/jobreport')
 api.add_resource(CheckLazadaPrice, '/lazprice')
 api.add_resource(LocalLazadaCrawl, '/local')
+api.add_resource(test, '/test')
 
 
 if __name__ == '__main__':
-#     app.run(debug=True)
-    app.run(host='0.0.0.0', port=80)
+    port = int(os.environ.get('PORT', 8080))
+    app.run(debug=True, host='0.0.0.0', port=port)

@@ -1,0 +1,30 @@
+FROM python:3.6-alpine3.7
+
+WORKDIR /app
+
+COPY . /app
+
+# update apk repo
+RUN echo "http://dl-4.alpinelinux.org/alpine/v3.7/main" >> /etc/apk/repositories && \
+    echo "http://dl-4.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories
+
+# install chromedriver
+RUN apk update
+RUN apk add chromium chromium-chromedriver
+
+#RUN apk add --no-cache --virtual .build-deps gcc musl-dev
+#RUN pip install cython
+#RUN apk del .build-deps gcc musl-dev
+
+RUN apk add --update curl gcc g++ \
+    && rm -rf /var/cache/apk/*
+
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8080
+
+ENV Name lazada_scrape
+
+CMD ["python", "-u", "server.py"]

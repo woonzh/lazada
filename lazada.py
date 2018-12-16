@@ -45,32 +45,42 @@ def parseMain(info):
     return df
 
 def nonServerGetProduct(name):
-    chromepath='chromedriver\chromedriver.exe'
+    print('test')
+    chromepath='./chromedriver(linux)/chromedriver'
     
     options=webdriver.ChromeOptions()
-    options.add_argument('no-sandbox')
-    options.add_argument('headless')
-    driver = webdriver.Chrome(chromepath, chrome_options=options)
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument("--disable-setuid-sandbox")
+    driver = webdriver.Chrome(chrome_options=options)
     driver.maximize_window()
     mainURL="https://www.lazada.sg"
     driver.get(mainURL)
     
-    time.sleep(2)
+    time.sleep(5)
+    
+    first=driver.page_source
     
     inForm=driver.find_element_by_id('q')
     inForm.send_keys(name)
     
-    driver.find_element_by_class_name('search-box__button--1oH7').click()
-    
+    button=driver.find_element_by_class_name('search-box__button--1oH7')
+    print(button)
+    driver.execute_script("arguments[0].click();", button)
+#    
+    time.sleep(4)
+#    
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
     
     df=parseMain(mains)
     
-#    a=driver.page_source
+    a=driver.page_source
     
-    time.sleep(3)
+    a={'first':first,
+       'second': driver.page_source}
     
     driver.quit()
+    
 
     return df
 
