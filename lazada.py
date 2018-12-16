@@ -97,7 +97,7 @@ def getProduct(name):
     
     time.sleep(2)
     
-    logo=driver.find_element_by_class_name('flexMenu_block -left -logo')
+    logo=driver.find_element_by_class_name('flexMenu_block')
     print('blogo %s'%(logo))
     
 #    inForm=driver.find_element_by_id('q')
