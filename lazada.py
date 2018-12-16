@@ -89,7 +89,7 @@ def getProduct(name):
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
-    mainURL="https://www.lazada.sg"
+    mainURL="https://www.lazada.sg/catalog/?q=sony+earphones"
 #    mainURL="https://blog.codeship.com/get-selenium-to-wait-for-page-load/"
     driver.get(mainURL)
     
@@ -106,23 +106,21 @@ def getProduct(name):
     logo=driver.find_element_by_class_name('lzd-logo-content')
     print('blogo %s'%(logo))
     
-    driver.find_element_by_class_name('search-box__button--1oH7').click()
-#    
+#    driver.find_element_by_class_name('search-box__button--1oH7').click()
+##    
     time.sleep(3)
+##    
+#    logo=driver.find_element_by_class_name('lzd-logo-content')
+#    print('blogo2 %s'%(logo))
 #    
-    logo=driver.find_element_by_class_name('lzd-logo-content')
-    print('blogo %s'%(logo))
-#    
-#    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-#    mains2=driver.find_elements_by_xpath('//div[@class="lzd-header-content"]')
-#    print(mains)
-#    print(mains2)
-#    df=parseMain(mains)
-#    print(len(df))
-#    
-#    time.sleep(1)
+    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
+    print(mains)
+    df=parseMain(mains)
+    print(len(df))
+    
+    time.sleep(1)
     
     driver.quit()
     
-    df=pd.DataFrame(columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country'])
+#    df=pd.DataFrame(columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country'])
     return df
