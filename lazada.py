@@ -88,10 +88,11 @@ def getProduct(name):
     options.binary_location = GOOGLE_CHROME_BIN
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
+    options.add_argument("user-data-dir=selenium") 
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
-    mainURL="https://www.lazada.sg/catalog/?q=osim+chair"
+    mainURL="https://www.lazada.sg"
 #    mainURL="https://blog.codeship.com/get-selenium-to-wait-for-page-load/"
     driver.get(mainURL)
     
@@ -101,23 +102,23 @@ def getProduct(name):
     
     first=driver.page_source
     
-#    inForm=driver.find_element_by_id('q')
-#    inForm.send_keys(name)
+    inForm=driver.find_element_by_id('q')
+    inForm.send_keys(name)
     
     logo=driver.find_elements_by_class_name('lzd-logo-content')
     print('blogo %s'%(logo))
     
-#    driver.find_element_by_class_name('search-box__button--1oH7').click()
+    driver.find_element_by_class_name('search-box__button--1oH7').click()
 ##    
-#    time.sleep(5)
+    time.sleep(3)
 ##    
-#    logo=driver.find_element_by_class_name('lzd-logo-content')
-#    print('blogo2 %s'%(logo))
+    logo=driver.find_element_by_class_name('lzd-logo-content')
+    print('blogo2 %s'%(logo))
 #    
-#    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
-#    print(mains)
-#    df=parseMain(mains)
-#    print(len(df))
+    mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
+    print(mains)
+    df=parseMain(mains)
+    print(len(df))
     a={'first':first,
        'second': driver.page_source}  
 
