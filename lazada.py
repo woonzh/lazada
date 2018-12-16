@@ -77,7 +77,7 @@ def getProduct(name):
     GOOGLE_CHROME_BIN=os.getenv('GOOGLE_CHROME_BIN')
     CHROMEDRIVER_PATH=os.getenv('CHROMEDRIVER_PATH')
     
-    print('google chrom bin: %s'%(GOOGLE_CHROME_BIN))
+    print('google chrome bin: %s'%(GOOGLE_CHROME_BIN))
     print('chromdriver: %s'%(CHROMEDRIVER_PATH))
     
     options=Options()
