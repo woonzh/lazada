@@ -88,7 +88,7 @@ def getProduct(name):
     options.binary_location = GOOGLE_CHROME_BIN
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
-#    options.add_argument("user-data-dir=selenium") 
+    options.add_argument("user-data-dir=selenium") 
 #    options.add_argument('headless')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
     driver.maximize_window()
@@ -112,7 +112,7 @@ def getProduct(name):
 ##    
     time.sleep(3)
 ##    
-    logo=driver.find_element_by_class_name('lzd-logo-content')
+    logo=driver.find_elements_by_class_name('lzd-logo-content')
     print('blogo2 %s'%(logo))
 #    
     mains=driver.find_elements_by_xpath('//div[@class="c3KeDq"]')

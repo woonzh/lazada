@@ -11,7 +11,7 @@ import json
 url='https://woonzh.herokuapp.com/lazprice'
 
 params={
-    'product': 'mothballs'
+    'product': 'mothball'
         }
 
 jid=requests.get(url, params=params)
