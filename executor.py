@@ -10,3 +10,8 @@ from lazada import lazadaCrawl
 
 lazCrawler = lazadaCrawl()
 
+#df=lazCrawler.nonServerGetProduct()
+
+
+
+lazCrawler.close()

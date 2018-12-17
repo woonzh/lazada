@@ -37,7 +37,7 @@ class lazadaCrawl:
                     self.chromepath='chromedriver(linux)/chromedriver'
                     
                 self.options=webdriver.ChromeOptions()
-#                self.options.add_argument('--headless')
+                self.options.add_argument('--headless')
                 self.driver = webdriver.Chrome(self.chromepath, chrome_options=self.options)                    
             
     def close(self):
@@ -149,6 +149,57 @@ class lazadaCrawl:
     #    df=pd.DataFrame(columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country'])
         return a
     
-#laz=lazadaCrawl()
+    def findAllHrefs(self):
+        self.driver.maximize_window()
+        mainURL="https://www.lazada.sg"
+        self.driver.get(mainURL)
+        classes=self.driver.find_elements_by_class_name('lzd-site-menu-sub')
+        
+        hrefStore=[]
+        
+        for element in classes:
+            sub1=element.find_elements_by_class_name("sub-item-remove-arrow")
+            print(len(list(sub1)))
+            sub2=element.find_elements_by_class_name("lzd-site-menu-sub-item")
+            print(len(list(sub2)))
+            tem={}
+            for i in sub1:
+                name=i.find_element_by_xpath('.//span').get_attribute("innerHTML")
+                tem[name]=i.find_element_by_xpath('.//a[@href]').get_attribute("href")
+            for i in sub2:
+                name=i.find_element_by_xpath('.//span').get_attribute("innerHTML")
+                tem[name]=i.find_element_by_xpath('.//a[@href]').get_attribute("href")
+            print(tem)
+            hrefStore.append(tem)
+        
+        return hrefStore
+    
+    def crawlOneSubCat(self,url):
+        self.driver.get(url)
+        mains=self.driver.find_elements_by_xpath('//div[@class="c3KeDq"]')
+        
+        df=self.parseMain(mains)
+        
+        time.sleep(2)
+        
+        return df
+    
+    def crawlPopular(self):
+        hrefs=self.findAllHrefs()
+        
+        dfCompile=[]
+        
+        for cat in hrefs:
+            tem={}
+            for subcat in cat:
+                tem[subcat]=self.crawlOneSubCat(cat[subcat])
+            dfCompile.append(tem)
+        
+        return dfCompile
+    
+laz=lazadaCrawl()
 #df=laz.nonServerGetProduct('nalgen water bottle')
-#laz.close()
+#hrefs=laz.crawlPopular()
+#time.sleep(5)
+df=laz.crawlOneSubCat(hrefs[0]['Action/Video Cameras'])
+laz.close()
