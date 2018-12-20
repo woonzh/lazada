@@ -10,8 +10,9 @@ from lazada import lazadaCrawl
 
 lazCrawler = lazadaCrawl()
 
-#df=lazCrawler.nonServerGetProduct()
+prodName='samsung galaxy tab'
+productData=lazCrawler.nonServerGetProduct(prodName)
 
-
+popularItems=lazCrawler.crawlPopular()
 
 lazCrawler.close()

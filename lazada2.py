@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+"""
+Created on Fri Dec 21 01:00:19 2018
 
-import time
-import pandas as pd
-import os
+@author: ASUS
+"""
 
-class lazadaCrawl:    
-    def __init__(self, server=False, container = False, windows=True):
+from scraper import scraper
+
+class lazada(scraper):
+    def __init__(self):
         self.xpaths={
             'name':'.//div[@class="c16H9d"]', 
             'price':'.//span[@class="c13VH6"]', 
@@ -18,65 +16,10 @@ class lazadaCrawl:
             'discount':'.//span[@class="c1hkC1"]',
             'reviews': './/span[@class="c3XbGJ"]',
             'country': './/span[@class="c2i43- "]'}
-        
-        if server:
-            t=1
-        else:
-            if container:
-                self.chromepath='./chromedriver(linux)/chromedriver'
-            
-                self.options=webdriver.ChromeOptions()
-                self.options.add_argument('--headless')
-                self.options.add_argument('--no-sandbox')
-                self.options.add_argument("--disable-setuid-sandbox")
-                self.driver = webdriver.Chrome(chrome_options=self.options)
-            else:
-                if windows:
-                    self.chromepath='chromedriver/chromedriver.exe'
-                else:
-                    self.chromepath='chromedriver(linux)/chromedriver'
-                    
-                self.options=webdriver.ChromeOptions()
-                self.options.add_argument('--headless')
-                self.driver = webdriver.Chrome(self.chromepath, chrome_options=self.options)                    
-            
-    def close(self):
-        self.driver.quit()
 
-    def parseData(self, info, attribute='innerText'):
-        lst=[]
-        for i in info:
-            lst.append(i.get_attribute(attribute))
-        
-        return lst
-    
-    def getText(self, element, xpath):
-        try:
-            txt=element.find_element_by_xpath(xpath).text
-        except:
-            txt=''
-        return txt
-    
-    def parseMain(self, info):
-        df=pd.DataFrame(columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country'])
-        count=0
-        for i in info:
-    #        print(i.text)
-            lst=[]
-            for j in self.xpaths:
-                lst.append(self.getText(i, self.xpaths[j]))
-            df.loc[count]=lst
-            count+=1
-        return df
-    
     def nonServerGetProduct(self,name):
-        self.driver.maximize_window()
         mainURL="https://www.lazada.sg"
-        self.driver.get(mainURL)
-        
-        time.sleep(5)
-        
-#        first=self.driver.page_source
+        self.pageLoad(mainURL)
         
         inForm=self.driver.find_element_by_id('q')
         inForm.send_keys(name)
@@ -196,10 +139,3 @@ class lazadaCrawl:
             dfCompile.append(tem)
         
         return dfCompile
-    
-#laz=lazadaCrawl()
-#df=laz.nonServerGetProduct('nalgen water bottle')
-#hrefs=laz.crawlPopular()
-#time.sleep(5)
-#df=laz.crawlOneSubCat(hrefs[0]['Action/Video Cameras'])
-#laz.close()
