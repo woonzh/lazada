@@ -22,7 +22,11 @@ api = Api(app)
 CORS(app)
 
 @app.route('/')
-def hello():
+def mainPage():
+    return redirect("http://localhost:8080/prodsearch", code=302)
+
+@app.route('/prodsearch')
+def prodSearch():
     return render_template('prodSearch.html')
 
 class CheckLazadaPrice(Resource):
