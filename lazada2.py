@@ -18,8 +18,9 @@ class lazada(scraper):
             './/del[@class="c13VH6"]':'innerText', 
             './/span[@class="c1hkC1"]':'innerText',
             './/span[@class="c3XbGJ"]':'innerText',
-            './/span[@class="c2i43- "]':'innerText'}
-        self.columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country']
+            './/span[@class="c2i43- "]':'innerText',
+            './/span[@class="c16H9d"]':'href',}
+        self.columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country', 'href']
         self.mainURL="https://www.lazada.sg"
         self.hrefxpaths={
             './/span':"innerHTML",
