@@ -199,6 +199,7 @@ class lazadaCrawl:
     
 #laz=lazadaCrawl()
 #df=laz.nonServerGetProduct('nalgen water bottle')
+#hrefs=laz.findAllHrefs()
 #hrefs=laz.crawlPopular()
 #time.sleep(5)
 #df=laz.crawlOneSubCat(hrefs[0]['Action/Video Cameras'])

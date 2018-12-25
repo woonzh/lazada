@@ -8,24 +8,26 @@ Created on Tue Dec 11 22:29:09 2018
 import requests
 import json
 
-url='https://woonzh.herokuapp.com/lazprice'
+#url='https://woonzh.herokuapp.com/lazprice'
 
-url='http://localhost:8080/local'
+url='http://localhost:8080/product'
 
 params={
-    'product': 'fossil watch'
+    'product': 'longitech mouse'
         }
-
+#
 jid=requests.get(url, params=params)
 print(jid)
 a=jid.text
+#
+#try:
+#    a=json.loads(jid.text)
+#    first=a['first']
+#    second=a['second']
+#except:
+#    t=1
 
-try:
-    a=json.loads(jid.text)
-    first=a['first']
-    second=a['second']
-except:
-    t=1
+#df=requests.get(url)
     
 #jid=jid.text
 #

@@ -15,7 +15,7 @@ from rq import Connection, get_failed_queue, Queue, get_current_job
 from rq.job import Job
 from worker import conn
 import os
-import lazada
+import executor
 
 app = Flask(__name__)
 api = Api(app)
@@ -23,50 +23,19 @@ CORS(app)
 
 @app.route('/')
 def hello():
-    return render_template('orderupload.html')
+    return render_template('prodSearch.html')
 
 class CheckLazadaPrice(Resource):
     def get(self):
+        print('test')
         prod=request.args.get("product", type=str)
-        df=lazada.getProduct(prod)
+        print(prod)
+        df=executor.getProduct([prod], 'json')
+        print(df)
         
-#        resp = make_response(df.to_csv(header=True, index=False))
-#        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
-#        resp.headers["Content-Type"] = "text/csv"
-#        resp.headers['Access-Control-Allow-Origin'] = '*'
-#        resp.headers['Access-Control-Allow-Credentials'] = 'true'
-#        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
-#        return resp
-    
         resp = flask.Response(json.dumps(df))
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp
-    
-class LocalLazadaCrawl(Resource):
-    def get(self):
-        prod=request.args.get("product", type=str)
-        df=lazada.nonServerGetProduct(prod)
-        
-        resp = make_response(df.to_csv(header=True, index=False))
-        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
-        resp.headers["Content-Type"] = "text/csv"
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.headers['Access-Control-Allow-Credentials'] = 'true'
-        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
-        return resp
-    
-#        resp = flask.Response(json.dumps(df))
-#        resp.headers['Access-Control-Allow-Origin'] = '*'
-#        return resp
-    
-class crawlLazada(Resource):
-    def get(self):
-        prod=request.args.get("product", type=str, default="marshall in-ear")
-        print("testworker start")
-        q=Queue(connection=conn)
-        job=q.enqueue(lazada.getProduct, prod)
-        print("testworker ends")
-        return str(job.id)
     
 class Failedworkers(Resource):
     def get(self):
@@ -115,14 +84,12 @@ class test(Resource):
         print("header success")
         return resp
 
-api.add_resource(crawlLazada, '/testworker')
 api.add_resource(Failedworkers, '/failedworkers')
 api.add_resource(GetJobReport, '/jobreport')
-api.add_resource(CheckLazadaPrice, '/lazprice')
-api.add_resource(LocalLazadaCrawl, '/local')
+api.add_resource(CheckLazadaPrice, '/product')
 api.add_resource(test, '/test')
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(debug=True, host='0.0.0.0', port=port)
+#    port = int(os.environ.get('PORT', 8080))
+    app.run(debug=True, host='localhost', port=8080)
