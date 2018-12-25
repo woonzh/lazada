@@ -39,25 +39,25 @@
           </a>
         </li>
         <li>
-          <a href="accounts">Accounts</a>
+          <a href="">Accounts</a>
         </li>
         <li>
-          <a href="inventory">Inventory</a>
+          <a href="">Inventory</a>
         </li>
         <li>
           <a href="">Orders</a>
         </li>
         <li>
-          <a href="delivery">Delivery</a>
+          <a href="">Delivery</a>
         </li>
         <li>
-          <a href="shopee">Shopee</a>
+          <a href="">Shopee</a>
         </li>
         <li>
-          <a href="csvtester">CSV Tester</a>
+          <a href="">CSV Tester</a>
         </li>
         <li>
-          <a href="orderupload">Order Upload to IMS</a>
+          <a href="">Order Upload to IMS</a>
         </li>
       </ul>
     </div>
@@ -86,13 +86,23 @@
         </form>
       </div>
 
-      <div id="toolbar">
-        <select class="form-control">
-          <option value="lazada">Lazada</option>
-          <option value="shopeel">Shopee</option>
-          <option value="qoo10">Qoo10</option>
-          <option value="all">All</option>
-        </select>
+      <div class="center-on-page">
+        <div class="select">
+          <select name="slct" id="slct">
+            <option>Choose an option</option>
+            <option value="1">Lazada</option>
+            <option value="2">Shopee</option>
+            <option value="3">Qoo10</option>
+            <option value="3">All</option>
+          </select>
+        </div>
+
+      </div>
+
+      <br>
+
+      <div id="buttons" align="right">
+        <a class="btn blue" onclick="exportTableToCSV()">Download as CSV</a>
       </div>
 
       <br>

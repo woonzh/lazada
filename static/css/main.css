@@ -69,22 +69,10 @@ textarea:focus, input:focus {
 }
 
 /* ------------------------------------ */
-button {
-	outline: none !important;
-	border: none;
-	background: transparent;
-}
-
-button:hover {
-	cursor: pointer;
-}
 
 iframe {
 	border: none !important;
 }
-
-
-
 
 /*//////////////////////////////////////////////////////////////////
 [ Utiliti ]*/
@@ -201,7 +189,7 @@ iframe {
 .s01 form .inner-form .input-field.third-wrap .btn-search {
   height: 100%;
   width: 100%;
-  background: #4272d7;
+  background: #36304a;
   white-space: nowrap;
   border-radius: .5px;
   font-size: 20px;
@@ -400,4 +388,98 @@ tbody tr:hover {
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+.center-on-page {
+  position: relative;
+}
+h1 {
+  text-align: center;
+}
+/* Reset Select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #36304a;
+  background-image: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: block;
+  width: 20em;
+  height: 3em;
+  line-height: 2;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+  float:left;
+}
+select {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0 0 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 1em;
+  background: #34495e;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+.select::after {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+/* button div */
+#buttons {
+  padding-top: 0px;
+  text-align: center;
+}
+
+/* start da css for da buttons */
+.btn {
+  border-radius: 0px;
+  padding: 5px 8px;
+  font-size: 15px;
+  margin: 0px;
+  color: #fff;
+  position: relative;
+  float: right;
+}
+
+.btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+.blue {
+  background-color: #2c3e50;
+  box-shadow: 0px 5px 0px 0px #1a252f;
+}
+
+.blue:hover {
+  background-color: #476481;
 }
