@@ -1,11 +1,11 @@
 # Ecommerce scrapping
 
 Current features (server)
-1. Crawl lazada for product details based on product Name
+1. Crawl lazada for relevant products based on product Name
 2. Crawl lazada for top selling items based on category
 
 Current features (website)
-1. Crawl lazada for product details based on product Name
+1. Crawl lazada for relevant products based on product Name
 
 Upcoming features (server)
 1. Extend above features to shopee and Qoo10
