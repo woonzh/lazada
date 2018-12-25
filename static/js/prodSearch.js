@@ -11,7 +11,7 @@ function clearRows(){
   }
 }
 
-function displayResults(data){
+function displayResults(data, test){
   var table=document.getElementById("results body");
   while(table.rows.length>1){
     table.deleteRow(1)
@@ -19,7 +19,9 @@ function displayResults(data){
 
   var nodeClone=document.getElementById("clone row");
 
-  //data=JSON.parse(data);
+  if (test==false){
+    data=JSON.parse(data);
+  }
   for (var prodName in data){
     var prod=data[prodName];
     for (var i=0; i<prod.length; i++){
@@ -34,7 +36,7 @@ function displayResults(data){
         if (colName=="original price"){new_row.cells[2].innerHTML=line[colName];}
         if (colName=="reviews"){new_row.cells[4].innerHTML=line[colName];}
         if (colName=="price"){new_row.cells[1].innerHTML=line[colName];}
-        if (colName=="href"){new_row.cells[0].innerHTML="<a href=//"+line[colName]+">"+new_row.cells[0].innerHTML+"</a>";}
+        if (colName=="href"){new_row.cells[0].innerHTML="<a href=//"+line[colName].replace('https://','')+">"+new_row.cells[0].innerHTML+"</a>";}
         /*switch(colName){
           case "country":
             new_row.cells[5].innerHTML=line[colName];
@@ -64,12 +66,12 @@ function testSearch(){
   alert('test');
   var data={
     'samsung tab':[
-      {"name":"test1", "price":"100", "country":"Singapore", "original price": "500", "reviews": "3", "discount":"10", "href":"www.google.com"},
-      {"name":"test2", "price":"200","country":"Singapore", "original price": "500", "reviews": "3", "discount":"10", "href":"www.google.com"},
-      {"name":"test3", "price":"300","country":"Singapore", "original price": "500", "reviews": "3", "discount":"10", "href":"www.google.com"}
+      {"name":"test1", "price":"100", "country":"Singapore", "original price": "SGD39.00", "reviews": "3", "discount":"10", "href":"https://www.google.com"},
+      {"name":"test2", "price":"200","country":"Singapore", "original price": "SGD39.000", "reviews": "3", "discount":"10", "href":"https://www.google.com"},
+      {"name":"test3", "price":"300","country":"Singapore", "original price": "SGD39.00", "reviews": "3", "discount":"10", "href":"https://www.google.com"}
     ]
   };
-  displayResults(data);
+  displayResults(data, true);
 }
 
 function productSearch(){
@@ -85,7 +87,7 @@ function productSearch(){
       type: 'GET',
       data:{product: product},
       success: function (data) {
-        displayResults(data);
+        displayResults(data, false);
         document.getElementById("loading").style.display="none";
       },
       error: function(jqxhr, status, exception) {

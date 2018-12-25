@@ -147,13 +147,3 @@ class scraper:
                 store.append(tem)
             
             return store
-
-#test=scraper()
-#test.pageLoad('https://www.lazada.sg/')
-#columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country']
-#elementsXPath='//a[@href]]'
-#xpath={
-#    '//a[@href]':'innerText'
-#        }
-#df=test.parseMain(columns, elementsXPath, xpath)
-#test.close()

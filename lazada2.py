@@ -19,8 +19,8 @@ class lazada(scraper):
             './/span[@class="c1hkC1"]':'innerText',
             './/span[@class="c3XbGJ"]':'innerText',
             './/span[@class="c2i43- "]':'innerText',
-            './/span[@class="c16H9d"]':'href',}
-        self.columns=['name', 'price', 'orginal price', 'discount', 'reviews', 'country', 'href']
+            './/div[@class="c16H9d"]//a[@href]':'href'}
+        self.columns=['name', 'price', 'original price', 'discount', 'reviews', 'country', 'href']
         self.mainURL="https://www.lazada.sg"
         self.hrefxpaths={
             './/span':"innerHTML",
@@ -70,3 +70,7 @@ class lazada(scraper):
             dfCompile[hrefs.iloc[i,0]]=self.crawlOneSubCat(hrefs.iloc[i, 1])
         
         return dfCompile
+    
+#laz=lazada()
+#df=laz.nonServerGetProduct(['addidas bag'], 'json')
+#laz.close()
