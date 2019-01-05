@@ -10,7 +10,21 @@ from lazada2 import lazada
 
 def getProduct(names, dataType='dataframe'):
     lazCrawler=lazada()
+    print('test')
     df=lazCrawler.nonServerGetProduct(names, dataType)
+    print('test2')
+    lazCrawler.close()
+    return df
+
+def getHrefs(dataType='dataframe'):
+    lazCrawler=lazada()
+    hrefs=lazCrawler.findAllHrefs(dataType)
+    lazCrawler.close()
+    return hrefs
+
+def getSubCat(url):
+    lazCrawler=lazada()
+    df=lazCrawler.crawlOneSubCat(url, 'dataframe')
     lazCrawler.close()
     return df
     

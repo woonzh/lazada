@@ -29,9 +29,12 @@ def mainPage():
 def prodSearch():
     return render_template('prodSearch.html')
 
+@app.route('/popular')
+def popular():
+    return render_template('popular.html')
+
 class CheckLazadaPrice(Resource):
     def get(self):
-        print('test')
         prod=request.args.get("product", type=str)
         print(prod)
         df=executor.getProduct([prod], 'json')
@@ -39,6 +42,28 @@ class CheckLazadaPrice(Resource):
         
         resp = flask.Response(json.dumps(df))
         resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
+    
+class GetHrefs(Resource):
+    def get(self):
+        df=executor.getHrefs('json')
+        print(df)
+        resp = flask.Response(json.dumps(df))
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
+    
+class GetSubCat(Resource):
+    def get(self):
+        url=request.args.get("url", type=str)
+        df=executor.getSubCat(url)
+        print(df)
+        
+        resp = make_response(df.to_csv(header=True, index=False))
+        resp.headers["Content-Disposition"] = "attachment; filename=error_reports.csv"
+        resp.headers["Content-Type"] = "text/csv"
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+        resp.headers['Access-Control-Allow-Methods']= 'GET,PUT,POST,DELETE,OPTIONS'
         return resp
     
 class Failedworkers(Resource):
@@ -92,8 +117,11 @@ api.add_resource(Failedworkers, '/failedworkers')
 api.add_resource(GetJobReport, '/jobreport')
 api.add_resource(CheckLazadaPrice, '/product')
 api.add_resource(test, '/test')
+api.add_resource(GetHrefs, '/hrefs')
+api.add_resource(GetSubCat, '/subcat')
 
 
 if __name__ == '__main__':
 #    port = int(os.environ.get('PORT', 8080))
-    app.run(debug=True, host='localhost', port=8080)
+#    app.run(debug=True, host='localhost', port=8080)
+    app.run(debug=True, host='0.0.0.0', port=8080)

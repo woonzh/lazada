@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MCCP tester</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">-->
+    <link rel="stylesheet prefetch" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/simple-sidebar.css')}}" rel="stylesheet">
+
+</head>
+
+<body onload="onload()">
+    <div>
+        <form action="#" id="loading" display="block"></form>
+    </div>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+              <li class="sidebar-brand">
+                <a href="">
+                  Main Page
+                </a>
+              </li>
+              <li>
+                <a href="/prodsearch">product crawl</a>
+              </li>
+              <li>
+                <a href="/popular">category crawl</a>
+              </li>
+            </ul>
+          </div>
+        <!-- /#sidebar-wrapper -->
+
+        <div id="booking-form"></div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><b>Toggle Menu</b></a>
+                <h1>Category Crawler</h1>
+                <p>Select the main category then the sub category and download csv.</p>
+            </div>
+
+            <div>
+                <select id="mainCat"onchange="updateSubCat()">
+                    <option>Main Category</option>
+                </select>
+                <select id="secCat">
+                    <option>Sub Category</option>
+                </select>
+                <button onclick="getCategoryResults()">Submit</button>
+            </div>
+
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/popular.js')}}"></script>
+    
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#wrapper").toggleClass("toggled");
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

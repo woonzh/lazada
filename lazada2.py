@@ -11,7 +11,7 @@ import pandas as pd
 
 class lazada(scraper):
     def __init__(self):
-        scraper.__init__(self)
+        scraper.__init__(self, windows=False, container=True)
         self.prodxpaths={
             './/div[@class="c16H9d"]':'innerText', 
             './/span[@class="c13VH6"]':'innerText', 
@@ -24,8 +24,14 @@ class lazada(scraper):
         self.mainURL="https://www.lazada.sg"
         self.hrefxpaths={
             './/span':"innerHTML",
-            './/a[@href]':'href'
+            './/a[@href]':'href',
+            '':'data-cate'
                 }
+        self.mainCatxpaths={
+            './/span':'innerHTML',
+            '':'id'
+                }
+        self.mainCatColumns=['name', 'id']
 
     def nonServerGetProduct(self,names, dataType='dataframe'):
         self.pageLoad(self.mainURL)
@@ -42,22 +48,34 @@ class lazada(scraper):
     def findAllHrefs(self, dataType='dataframe'):
         self.pageLoad(self.mainURL)
         
-        columns=['name', 'href']
+        columns=['name', 'href', 'cate']
 #        main=[]
         
 #        classes=self.driver.find_elements_by_class_name('lzd-site-menu-sub')
         
         df1=self.parseMain(columns, '//li[@class="sub-item-remove-arrow"]', self.hrefxpaths, self.driver, dataType)
         df2=self.parseMain(columns, '//li[@class="lzd-site-menu-sub-item"]', self.hrefxpaths, self.driver, dataType)
+        df=df1+df2
         
+        mainCat=self.parseMain(self.mainCatColumns, '//li[@class="lzd-site-menu-root-item"]', self.mainCatxpaths, self.driver, dataType)
+        
+        for i in mainCat:
+            i['subcats']=[]
+        
+                
+        for i in df:
+            category=int(i['cate'].split('_')[1])-1
+            mainCat[category]['subcats'].append(i)
+        
+        return mainCat
         if dataType=='dataframe':
             return df1.append(df2)
         if dataType=='json':
-            return df1+df2
+            return mainCat
     
-    def crawlOneSubCat(self,url):
+    def crawlOneSubCat(self,url, dataType):
         self.pageLoad(url)        
-        df=self.parseMain(self.columns, '//div[@class="c3KeDq"]', self.prodxpaths, self.driver)
+        df=self.parseMain(self.columns, '//div[@class="c3KeDq"]', self.prodxpaths, self.driver, dataType)
         
         return df
     
@@ -72,5 +90,8 @@ class lazada(scraper):
         return dfCompile
     
 #laz=lazada()
+#mainCat=laz.findAllHrefs('json')
+
 #df=laz.nonServerGetProduct(['addidas bag'], 'json')
+
 #laz.close()

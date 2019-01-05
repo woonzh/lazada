@@ -83,7 +83,7 @@ class scraper:
 #                self.proxies=['178.128.88.116:3128']
                     
                 self.options=webdriver.ChromeOptions()
-                self.options.add_argument('--headless')
+#                self.options.add_argument('--headless')
 #                self.options.add_argument('--proxy-server=%s' % self.proxies[0])
                 self.driver = webdriver.Chrome(self.chromepath, chrome_options=self.options)
                 self.driver.maximize_window()
@@ -113,8 +113,12 @@ class scraper:
     
     def getText(self, element, xpath, attribute='innerText', rmvWords='', dtype=''):
         try:
-            txt=element.find_element_by_xpath(xpath).get_attribute(attribute)
-            txt=txt.replace(rmvWords, "")
+            if xpath=="":
+                txt=element.get_attribute(attribute)
+                txt=txt.replace(rmvWords, "")
+            else:
+                txt=element.find_element_by_xpath(xpath).get_attribute(attribute)
+                txt=txt.replace(rmvWords, "")
         except:
             txt=''
             
