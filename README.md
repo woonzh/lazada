@@ -1,3 +1,13 @@
+# Instructions (Danielle)
+1. To initialise server, open terminal and key in the following commands
+    a. cd Desktop
+    b. cd lazada-master
+    c. git pull origin master (to pull in latest updates, else skip this)
+    d. docker-compose up
+2. To shut down server
+    a. in the same terminal press ctrl-z
+    b. docker-compose down. (This is important else it will still be running in the background)
+
 # Ecommerce scrapping
 
 Current features (server)
