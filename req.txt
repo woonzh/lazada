@@ -25,7 +25,7 @@ docutils==0.14
 enum34==1.1.6
 face-recognition-models==0.3.0
 Flask==0.12.2
-Flask-Cors==3.0.6
+Flask-Cors==3.0.9
 Flask-RESTful==0.3.6
 gast==0.2.0
 grpcio==1.10.0
