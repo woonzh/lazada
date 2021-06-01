@@ -5,7 +5,7 @@ numpy
 numpydoc
 requests==2.18.4
 simplejson==3.13.2
-urllib3==1.22
+urllib3==1.26.5
 Flask==0.12
 Flask-RESTful==0.3.6
 Flask-Cors==3.0.2
